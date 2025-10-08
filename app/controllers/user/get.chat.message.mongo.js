@@ -9,10 +9,10 @@ module.exports.getChatMessages = async(sender,receiver,payload,options={}) => {
             return null;		
 	}
 	const {
-          limit = 50,
-          skip = 0,
+          limit = payload.limit,
+          skip = payload.skip,
 	  sortBy = 'created_at',
-          sortOrder = 'desc'		
+          sortOrder = payload.sortOrder		
 	} = options;
 	const query = {
           $or: [

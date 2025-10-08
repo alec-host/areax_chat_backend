@@ -20,6 +20,14 @@ chatMessageSchema.index({ sender: 1, receiver: 1 });
 chatMessageSchema.index({ created_at: -1 });
 chatMessageSchema.index({ is_deleted: 1 });
 
+/**
+ * Virtual field: bubble_position
+ * Usage: message.bubble_position(currentUserId)
+ */
+chatMessageSchema.methods.bubble_position = function (currentUserId) {
+  return this.sender === currentUserId ? 'right' : 'left';
+};
+
 const ChatMessageModel = mongoose.model("tbl_chat_message", chatMessageSchema);
 
 module.exports = ChatMessageModel;
